@@ -11,6 +11,10 @@ abstract class TooltipControllerImpl {
 
   bool _playActive = false;
 
+  final bool _replaceDuplicateIndices;
+
+  TooltipControllerImpl(this._replaceDuplicateIndices);
+
   Stream<OverlayTooltipModel?> get widgetsPlayStream =>
       _widgetsPlayController.stream
         ..listen((event) {
@@ -85,8 +89,10 @@ abstract class TooltipControllerImpl {
         .map((e) => e.displayIndex)
         .toList()
         .contains(model.displayIndex)) {
-      int prevIndex = _playableWidgets.indexOf(model);
-      _playableWidgets[prevIndex] = model;
+      if (_replaceDuplicateIndices) {
+        int prevIndex = _playableWidgets.indexOf(model);
+        _playableWidgets[prevIndex] = model;
+      }
     } else {
       _playableWidgets.add(model);
     }
