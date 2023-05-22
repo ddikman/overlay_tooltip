@@ -4,7 +4,10 @@ import 'constants/enums.dart';
 import 'core/tooltip_controller.dart';
 import 'core/overlay_tooltip_item.dart';
 
-class TooltipController extends TooltipControllerImpl {}
+class TooltipController extends TooltipControllerImpl {
+  TooltipController({bool replaceDuplicateIndices = true})
+      : super(replaceDuplicateIndices);
+}
 
 class OverlayTooltipScaffold extends OverlayTooltipScaffoldImpl {
   final TooltipController controller;
